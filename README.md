@@ -35,5 +35,5 @@ To set up the project, follow these steps:
 
 ## TODO
 
-- [ ] Add 15 minutes of additional required break time when working over 9 hours (js and sheet formula): [ArbZG §4](https://www.gesetze-im-internet.de/arbzg/__4.html).
+- [x] Add 15 minutes of additional required break time when working over 9 hours (js and sheet formula): [ArbZG §4](https://www.gesetze-im-internet.de/arbzg/__4.html).
 - [ ] Add a way to easier configure the target working time and break time.

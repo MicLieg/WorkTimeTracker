@@ -122,6 +122,14 @@ function calculateAndShowDuration(showAlert) {
         }
     }
 
+    if (workedHours > 9 || (workedHours === 9 && workedMinutes > 0)) {
+        workedMinutes -= 15;
+        if (workedMinutes < 0) {
+            workedHours -= 1;
+            workedMinutes += 60;
+        }
+    }
+
     updateElementText('workedTime', `${pad(workedHours)}:${pad(workedMinutes)}:${pad(workedSeconds)}`);
     if (showAlert) alert(`Time Worked: ${pad(workedHours)} hours and ${pad(workedMinutes)} minutes.`);
 }
@@ -170,4 +178,11 @@ function toggleVisibility(showId, show, ...hideIds) {
 function resetIntervals() {
     clearInterval(countdownInterval);
     clearInterval(overtimeInterval);
+}
+
+function calculateAdditionalBreakTime(workedHours, workedMinutes) {
+    if (workedHours > 9 || (workedHours === 9 && workedMinutes > 0)) {
+        return 15;
+    }
+    return 0;
 }
