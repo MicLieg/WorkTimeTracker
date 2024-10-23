@@ -34,4 +34,5 @@ To set up the project, follow these steps:
 14. Click the 'Stop' button to stop tracking your working hours. The end time will be added to the row in your Google Sheet.
 
 ## TODO
+
 - [ ] Add a way to easier configure the target working time and break time.
