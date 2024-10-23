@@ -34,6 +34,4 @@ To set up the project, follow these steps:
 14. Click the 'Stop' button to stop tracking your working hours. The end time will be added to the row in your Google Sheet.
 
 ## TODO
-
-- [x] Add 15 minutes of additional required break time when working over 9 hours (js and sheet formula): [ArbZG §4](https://www.gesetze-im-internet.de/arbzg/__4.html).
 - [ ] Add a way to easier configure the target working time and break time.
