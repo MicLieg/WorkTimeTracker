@@ -179,10 +179,3 @@ function resetIntervals() {
     clearInterval(countdownInterval);
     clearInterval(overtimeInterval);
 }
-
-function calculateAdditionalBreakTime(workedHours, workedMinutes) {
-    if (workedHours > 9 || (workedHours === 9 && workedMinutes > 0)) {
-        return 15;
-    }
-    return 0;
-}
