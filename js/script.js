@@ -66,7 +66,10 @@ function loadStoredTimes() {
             // If stop time is stored, display the worked time
             storedStopTime = new Date(storedStopTime);
             updateElementText('stopTime', formatGermanTime(storedStopTime));
-            calculateAndShowDuration(storedStartTime, storedStopTime);
+
+            let workedTime = getWorkedTime(storedStartTime, storedStopTime);
+            calculateAndShowDuration(workedTime);
+
             displayLabel('workedTimeLabel');
             startTime = null; // Reset startTime to allow new start
         } else {
@@ -255,7 +258,10 @@ function writeTimeToSheet(type, date, time) {
         body: JSON.stringify(data)
     })
         .then(response => console.log(`${type} '${date}' sent to Google Sheets:`, response))
-        .catch(error => console.error(`Error writing ${type} '${date}' to Google Sheets:`, error));
+        .catch(error => {
+            console.error(`Error writing ${type}: '${date}' to Google Sheets:`, error);
+            alert(`Error writing ${type} '${date}' to Google Sheets.`);
+        });
 }
 
 /**
