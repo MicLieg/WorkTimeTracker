@@ -28,12 +28,8 @@ To set up the project, follow these steps:
 8. In the Apps Script Editor, update the `SPREADSHEET_ID` variable with the ID of your Google Sheet (part of the URL).
 9. Deploy the script as a web app by clicking the 'Deploy' button and selecting 'New deployment'.
 10. Copy the URL of the web application and update the `APPS_SCRIPT_URL` variable in `./js/script.js` with this URL.
-11. (Optional) Copy the files (except `./screenshots/` and `README.md`) to a web server of your choice.
-12. Visit the web server's URL in your browser OR open the file `index.html' in your browser.
-13. Start tracking your working hours by clicking the 'Start' button. A new row will be added to your Google Sheet with the current date and time.
-14. Click the 'Stop' button to stop tracking your working hours. The end time will be added to the row in your Google Sheet.
-
-## TODO
-
-- [ ] Add 15 minutes of additional required break time when working over 9 hours (js and sheet formula): [ArbZG §4](https://www.gesetze-im-internet.de/arbzg/__4.html).
-- [ ] Add a way to easier configure the target working time and break time.
+11. (Optional) Customize the `PLANNED_WORK_DAY_HOURS`, `FIRST_BREAK_THRESHOLD_HOURS`, `FIRST_BREAK_MINUTES`, `SECOND_BREAK_THRESHOLD_HOURS` and `SECOND_BREAK_MINUTES` variables in `./js/script.js` to fit your needs.
+12. (Optional) Copy the files (except `./screenshots/` and `README.md`) to a web server of your choice.
+13. Visit the web server's URL in your browser OR open the `index.html` file in your browser.
+14. Start tracking your working hours by clicking the `Start` button. A new row will be added to your Google Sheet with the current date and time.
+15. Click the `Stop` button to stop tracking your working hours. The end time will be added to the row in your Google Sheet.

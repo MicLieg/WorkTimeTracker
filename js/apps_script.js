@@ -17,7 +17,7 @@ function doPost(e) {
     // Insert formulas into columns D to G for the new row
     const lastRow = sheet.getLastRow();
     sheet.getRange(lastRow, 4).setFormula('=IF(AND(B' + lastRow + '<>""; C' + lastRow + '<>""); C' + lastRow + ' - B' + lastRow + '; "")');
-    sheet.getRange(lastRow, 5).setFormula('=IF(AND(B' + lastRow + '<>""; C' + lastRow + '<>""); IF(D' + lastRow + ' > TIME(6; 0; 0); TIME(0; 30; 0); 0); "")');
+    sheet.getRange(lastRow, 5).setFormula('=IF(AND(B' + lastRow + '<>""; C' + lastRow + '<>""); IF(D' + lastRow + ' > TIME(6; 0; 0); TIME(0; 30; 0); 0) + IF(D' + lastRow + ' > TIME(9; 0; 0); TIME(0; 15; 0); 0); "")');
     sheet.getRange(lastRow, 6).setFormula('=IF(AND(B' + lastRow + '<>""; C' + lastRow + '<>""); D' + lastRow + ' - E' + lastRow + '; "")');
     sheet.getRange(lastRow, 7).setFormula('=IF(AND(B' + lastRow + '<>""; C' + lastRow + '<>""); F' + lastRow + ' - TIME(8; 0; 0); "")');
   } else if (data.stopTime) {
