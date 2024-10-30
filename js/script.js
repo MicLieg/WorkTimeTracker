@@ -163,6 +163,7 @@ function startWorkTimeTimer(plannedStopTime) {
     countdownInterval = setInterval(() => {
         const workTimeLeft = getWorkTimeLeft(plannedStopTime);
         if (workTimeLeft <= 0) {
+            clearInterval(countdownInterval);
             startOvertimeTimer(plannedStopTime);
             displayLabel('overtimeLabel');
             alert('Work is over! Time to go home!');
@@ -382,6 +383,7 @@ function displayLabel(showId) {
         const element = document.getElementById(id);
         if (element) {
             element.style.display = id === showId ? 'block' : 'none';
+            console.log(`Element with id '${id}' is ${id === showId ? 'visible' : 'hidden'}`);
         } else {
             console.error(`Element with id '${id}' not found`);
         }
