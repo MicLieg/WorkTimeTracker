@@ -1,5 +1,5 @@
 function doPost(e) {
-  const SPREADSHEET_ID = 'GOOGLE_SPREADSHEET_ID';
+  const SPREADSHEET_ID = 'YOUR_GOOGLE_SPREADSHEET_ID';
   const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
   const currentYear = new Date().getFullYear();
   const sheetName = currentYear.toString();

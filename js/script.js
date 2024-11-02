@@ -1,40 +1,4 @@
 /**
- * URL for the Google Apps Script endpoint
- * @constant {string}
- */
-const APPS_SCRIPT_URL = 'APPS_SCRIPT_URL';
-
-/**
- * Number of hours in a planned work day
- * @constant {number}
- */
-const PLANNED_WORK_DAY_HOURS = 8;
-
-/**
- * Hour threshold when first break becomes mandatory
- * @constant {number}
- */
-const FIRST_BREAK_THRESHOLD_HOURS = 6;
-
-/**
- * Duration of first mandatory break in minutes
- * @constant {number}
- */
-const FIRST_BREAK_MINUTES = 30;
-
-/**
- * Hour threshold when second break becomes mandatory
- * @constant {number}
- */
-const SECOND_BREAK_THRESHOLD_HOURS = 9;
-
-/**
- * Duration of second mandatory break in minutes
- * @constant {number}
- */
-const SECOND_BREAK_MINUTES = 15;
-
-/**
  * State variables for tracking time and intervals
  * @type {Date} startTime - Work start timestamp
  * @type {Date} stopTime - Work stop timestamp
@@ -47,9 +11,21 @@ let startTime, stopTime, countdownInterval, overtimeInterval;
  * Initialize app when DOM content is loaded
  */
 document.addEventListener('DOMContentLoaded', () => {
+    checkAppsScriptUrl();
     loadStoredTimes();
     addEventListeners();
 });
+
+/**
+ * Check if APPS_SCRIPT_URL has been changed from default value
+ * @throws {Error} If URL has not been changed from default
+ */
+function checkAppsScriptUrl() {
+    if (APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') {
+        alert('Please update the APPS_SCRIPT_URL constant with your Google Apps Script deployment URL');
+        console.error('APPS_SCRIPT_URL not configured');
+    }
+}
 
 /**
  * Load and process stored start/stop times from localStorage
