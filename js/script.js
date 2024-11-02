@@ -119,7 +119,7 @@ function handleStop() {
     const [workedHours, workedMinutes] = splitTime(workedTime);
     alert(`Time Worked: ${padNumber(workedHours)} hours and ${padNumber(workedMinutes)} minutes.`);
 
-    // Reset time variables after stopping
+    // Reset time variables after stopping (to allow new start)
     startTime = null;
     stopTime = null;
 }
@@ -131,40 +131,35 @@ function handleStop() {
 function startWorkTimeTimer(plannedStopTime) {
     clearInterval(countdownInterval);
 
-    // Update immediately first
-    const workTimeLeft = getWorkTimeLeft(plannedStopTime);
-    updateElementText('countdown', formatTimeDifference(workTimeLeft));
-
     // Then start interval for subsequent updates
     countdownInterval = setInterval(() => {
         const workTimeLeft = getWorkTimeLeft(plannedStopTime);
-        if (workTimeLeft <= 0) {
+        if (workTimeLeft > 0) {
+            updateElementText('countdown', formatTimeDifference(workTimeLeft));
+        } else {
+            // Work is over, start overtime timer
+            updateElementText('countdown', '00:00:00');
             clearInterval(countdownInterval);
             startOvertimeTimer(plannedStopTime);
-            displayLabel('overtimeLabel');
-            alert('Work is over! Time to go home!');
-        } else {
-            updateElementText('countdown', formatTimeDifference(workTimeLeft));
         }
-    }, 1000);
+    }, 50);
 }
 
 /**
  * Start overtime timer after planned stop time
- * @param {Date} stopTime - Planned stop timestamp
+ * @param {Date} plannedStopTime - Planned stop timestamp
  */
-function startOvertimeTimer(stopTime) {
+function startOvertimeTimer(plannedStopTime) {
     clearInterval(overtimeInterval);
+    displayLabel('overtimeLabel');
 
-    // Update immediately first
-    const overtime = new Date() - stopTime;
-    updateElementText('overtime', formatTimeDifference(overtime));
+    alert('Work is over! Time to go home!');
 
     // Then start interval for subsequent updates
     overtimeInterval = setInterval(() => {
-        const overtime = new Date() - stopTime;
+        const overtime = new Date() - plannedStopTime;
         updateElementText('overtime', formatTimeDifference(overtime));
-    }, 1000);
+    }, 50);
 }
 
 /**
