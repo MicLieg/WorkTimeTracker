@@ -225,7 +225,15 @@ function writeTimeToSheet(type, date, time) {
     const data = {
         date,
         startTime: type === 'startTime' ? time : '',
-        stopTime: type === 'stopTime' ? time : ''
+        stopTime: type === 'stopTime' ? time : '',
+        config: {
+            plannedWorkDayHours: PLANNED_WORK_DAY_HOURS,
+            firstBreakThresholdHours: FIRST_BREAK_THRESHOLD_HOURS,
+            firstBreakMinutes: FIRST_BREAK_MINUTES,
+            secondBreakThresholdHours: SECOND_BREAK_THRESHOLD_HOURS,
+            secondBreakMinutes: SECOND_BREAK_MINUTES,
+            sheetName: SHEET_NAME
+        }
     };
 
     fetch(APPS_SCRIPT_URL, {

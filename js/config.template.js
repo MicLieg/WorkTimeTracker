@@ -5,6 +5,13 @@
 const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
 
 /**
+ * Name of the sheet to store the data in
+ * If set to "CURRENT_YEAR" the current year is used as sheet name and a new sheet is created for each new year
+ * @constant {string}
+ */
+const SHEET_NAME = "Time Tracker";
+
+/**
  * Number of hours in a planned work day
  * @constant {number}
  */
