@@ -45,8 +45,7 @@ function doPost(e) {
       Logger.log('Added row:', lastRow);
 
       // Gross working time (D)
-
-      sheet.getRange(lastRow, 4).setFormula('=IF(AND(B' + lastRow + '<>""; C' + lastRow + '<>""); C' + lastRow + ' - B' + lastRow + '; "")');
+      sheet.getRange(lastRow, 4).setFormula('=IF(AND(B' + lastRow + '<>""; C' + lastRow + '<>""); IF(C' + lastRow + '<B' + lastRow + '; C' + lastRow + '-B' + lastRow + '+1; C' + lastRow + '-B' + lastRow + '); "")');
 
       // Break time (E) - Dynamic based on config
       Logger.log('Inserting break formula');

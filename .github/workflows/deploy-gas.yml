@@ -1,0 +1,57 @@
+name: Deploy Google Apps Script and Web Files
+
+on:
+  push:
+    branches:
+      - main # or your default branch
+
+jobs:
+  deploy-gas:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      - name: Install clasp
+        run: npm install -g @google/clasp
+
+      - name: Create clasp config file
+        run: |
+          echo '{"token":{"access_token":"${{ secrets.CLASPRC_ACCESS_TOKEN }}","scope":"https://www.googleapis.com/auth/script.projects","token_type":"Bearer","id_token":"${{ secrets.CLASPRC_ID_TOKEN }}","expiry_date":1766922161159,"refresh_token":"${{ secrets.CLASPRC_REFRESH_TOKEN }}"}}' > ~/.clasprc.json
+
+      - name: Deploy script
+        run: clasp push
+
+  deploy-web:
+    needs: deploy-gas
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create config.js from template
+        run: |
+          cp js/config.template.js js/config.js
+          sed -i 's/YOUR_APPS_SCRIPT_URL/${{ secrets.APPS_SCRIPT_URL }}/g' js/config.js
+          sed -i 's/YOUR_DEPLOYMENT_ID/${{ secrets.DEPLOYMENT_ID }}/g' js/config.js
+
+      - name: Upload files to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            README.md
+            screenshots/**
+            js/config.template.js
+            js/apps_script.js
